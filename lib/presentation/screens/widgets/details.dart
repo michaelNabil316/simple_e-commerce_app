@@ -1,8 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flitill/bloc/bloc.dart';
-import 'package:flitill/bloc/bloc.dart';
-import 'package:flitill/bloc/events.dart';
-import 'package:flitill/bloc/states.dart';
+import 'package:flitill/bussiness_logic/bloc/bloc.dart';
+import 'package:flitill/bussiness_logic/bloc/events.dart';
+import 'package:flitill/bussiness_logic/bloc/states.dart';
 import 'package:flitill/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,14 +14,14 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
-  final _counterBloc = CounterBloc();
+  final _counterBloc = ProductBloc();
 
   @override
   Widget build(BuildContext context) {
-    final productDetails = CounterBloc.get(context).productDetails;
+    final productDetails = ProductBloc.get(context).productDetails;
     return BlocBuilder(
       bloc: _counterBloc,
-      builder: (BuildContext context, CounterState state) {
+      builder: (BuildContext context, ProductState state) {
         return Container(
           child: Column(
             children: [
@@ -76,7 +75,7 @@ class _DetailsState extends State<Details> {
                     'description': '${productDetails['description']}',
                     'image': '${productDetails['image']}'
                   };
-                  CounterBloc.get(context)
+                  ProductBloc.get(context)
                       .add(AddToFavourites(pro: newProductDetails));
                   AwesomeDialog(
                     context: context,

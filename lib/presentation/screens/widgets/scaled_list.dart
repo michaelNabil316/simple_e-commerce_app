@@ -1,6 +1,6 @@
-import 'package:flitill/bloc/bloc.dart';
-import 'package:flitill/bloc/events.dart';
-import 'package:flitill/bloc/states.dart';
+import 'package:flitill/bussiness_logic/bloc/events.dart';
+import 'package:flitill/bussiness_logic/bloc/bloc.dart';
+import 'package:flitill/bussiness_logic/bloc/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scaled_list/scaled_list.dart';
@@ -11,18 +11,22 @@ class ScaleListWidget extends StatefulWidget {
   const ScaleListWidget({Key key, @required this.prodData}) : super(key: key);
 
   @override
-  _ScaleListWidgetState createState() => _ScaleListWidgetState();
+  State<ScaleListWidget> createState() => _ScaleListWidgetState();
 }
 
 class _ScaleListWidgetState extends State<ScaleListWidget> {
-  final _counterBloc = CounterBloc();
+  @override
+  void initState() {
+    super.initState();
+    if (ProductBloc.get(context).isDetails == true)
+      ProductBloc.get(context).add(ChangeDetailsBoolen());
+  }
 
   @override
   Widget build(BuildContext context) {
     final myMdeia = MediaQuery.of(context).size;
-    return BlocBuilder(
-      bloc: _counterBloc,
-      builder: (BuildContext context, CounterState state) {
+    return BlocBuilder<ProductBloc, ProductState>(
+      builder: (BuildContext context, ProductState state) {
         return ScaledList(
           itemCount: widget.prodData.length,
           itemColor: (index) {
@@ -30,6 +34,7 @@ class _ScaleListWidgetState extends State<ScaleListWidget> {
           },
           itemBuilder: (index, selectedIndex) {
             final category = widget.prodData[index];
+            print(category);
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -42,7 +47,7 @@ class _ScaleListWidgetState extends State<ScaleListWidget> {
                     borderRadius: BorderRadius.circular(17),
                     color: Colors.white,
                   ),
-                  child: Image.network(category['image']),
+                  child: Image.network(category.image),
                 ),
                 SizedBox(
                   height: 2.5,
@@ -51,7 +56,7 @@ class _ScaleListWidgetState extends State<ScaleListWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      '${category['price']} \$',
+                      '${category.price} \$',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: selectedIndex == index ? 25 : 20),
@@ -59,15 +64,15 @@ class _ScaleListWidgetState extends State<ScaleListWidget> {
                     InkWell(
                       onTap: () {
                         var newProductDetails = {
-                          'title': '${category['title']}',
-                          'price': '${category['price']}',
-                          'description': '${category['description']}',
-                          'image': '${category['image']}',
+                          'title': '${category.title}',
+                          'price': '${category.price}',
+                          'description': '${category.description}',
+                          'image': '${category.image}',
                         };
-                        CounterBloc.get(context).add(
+                        ProductBloc.get(context).add(
                             ChangeProductDetails(product: newProductDetails));
-                        if (CounterBloc.get(context).isDetails == false)
-                          CounterBloc.get(context).add(ChangeDetailsBoolen());
+                        if (ProductBloc.get(context).isDetails == false)
+                          ProductBloc.get(context).add(ChangeDetailsBoolen());
                       },
                       child: Container(
                         height: 40,
@@ -90,11 +95,5 @@ class _ScaleListWidgetState extends State<ScaleListWidget> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _counterBloc.close();
   }
 }

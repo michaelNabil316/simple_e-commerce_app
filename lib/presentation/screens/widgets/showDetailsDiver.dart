@@ -1,6 +1,6 @@
-import 'package:flitill/bloc/bloc.dart';
-import 'package:flitill/bloc/events.dart';
-import 'package:flitill/bloc/states.dart';
+import 'package:flitill/bussiness_logic/bloc/bloc.dart';
+import 'package:flitill/bussiness_logic/bloc/events.dart';
+import 'package:flitill/bussiness_logic/bloc/states.dart';
 import 'package:flitill/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,13 +13,13 @@ class ShowDetailsDiver extends StatefulWidget {
 }
 
 class _ShowDetailsDiverState extends State<ShowDetailsDiver> {
-  final _counterBloc = CounterBloc();
+  final _counterBloc = ProductBloc();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: _counterBloc,
-      builder: (BuildContext context, CounterState state) {
+      builder: (BuildContext context, ProductState state) {
         return Column(
           children: [
             SizedBox(height: 20),
@@ -42,12 +42,12 @@ class _ShowDetailsDiverState extends State<ShowDetailsDiver> {
                       borderRadius: BorderRadius.circular(17),
                       color: Colors.amber,
                     ),
-                    child: CounterBloc.get(context).isDetails
+                    child: ProductBloc.get(context).isDetails
                         ? Icon(Icons.arrow_drop_up_outlined)
                         : Icon(Icons.arrow_drop_down_sharp),
                   ),
                   onTap: () {
-                    CounterBloc.get(context).add(ChangeDetailsBoolen());
+                    ProductBloc.get(context).add(ChangeDetailsBoolen());
                   },
                 ),
                 SizedBox(width: 20),

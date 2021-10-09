@@ -1,11 +1,12 @@
 import 'dart:math';
-import 'package:flitill/bloc/events.dart';
-import 'package:flitill/bloc/states.dart';
+import 'package:flitill/presentation/screens/widgets/favWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flitill/models/favWidget.dart';
 
-class CounterBloc extends Bloc<CounterEvents, CounterState> {
+import 'events.dart';
+import 'states.dart';
+
+class ProductBloc extends Bloc<ProductEvents, ProductState> {
   int counter = 0;
   bool isDetails = false;
   double totalPrice = 00.0;
@@ -19,11 +20,11 @@ class CounterBloc extends Bloc<CounterEvents, CounterState> {
   List<FavrouitWidget> favProducts = [];
   @override
   //implement initialState
-  CounterState get initialState => InitialCounterStates();
-  static CounterBloc get(BuildContext context) => BlocProvider.of(context);
+  ProductState get initialState => InitialProductStates();
+  static ProductBloc get(BuildContext context) => BlocProvider.of(context);
 
   @override
-  Stream<CounterState> mapEventToState(CounterEvents event) async* {
+  Stream<ProductState> mapEventToState(ProductEvents event) async* {
     if (event is WeatherDegree) {
       yield* _changeVale();
     }
@@ -44,22 +45,22 @@ class CounterBloc extends Bloc<CounterEvents, CounterState> {
     }
   }
 
-  Stream<CounterState> _changeVale() async* {
+  Stream<ProductState> _changeVale() async* {
     counter = Random().nextInt(50);
-    yield SuccessCounterStates();
+    yield SuccessProductStates();
   }
 
-  Stream<CounterState> _changeDetailsVale() async* {
+  Stream<ProductState> _changeDetailsVale() async* {
     isDetails = !isDetails;
-    yield SuccessCounterStates();
+    yield SuccessProductStates();
   }
 
-  Stream<CounterState> _changeProductDetails(newProduct) async* {
+  Stream<ProductState> _changeProductDetails(newProduct) async* {
     productDetails = newProduct;
-    yield SuccessCounterStates();
+    yield SuccessProductStates();
   }
 
-  Stream<CounterState> _changeFavProducts(newProduct) async* {
+  Stream<ProductState> _changeFavProducts(newProduct) async* {
     favProducts.add(FavrouitWidget(
       title: newProduct['title'],
       price: newProduct['price'],
@@ -70,18 +71,18 @@ class CounterBloc extends Bloc<CounterEvents, CounterState> {
     assert(myDouble is double);
     totalPrice += myDouble;
 
-    yield SuccessCounterStates();
+    yield SuccessProductStates();
   }
 
-  Stream<CounterState> _deleteProduct(product) async* {
+  Stream<ProductState> _deleteProduct(product) async* {
     favProducts.remove(product);
-    yield SuccessCounterStates();
+    yield SuccessProductStates();
   }
 
-  Stream<CounterState> _minusPrice(p) async* {
+  Stream<ProductState> _minusPrice(p) async* {
     var myDouble = double.parse(p);
     assert(myDouble is double);
     totalPrice -= myDouble;
-    yield SuccessCounterStates();
+    yield SuccessProductStates();
   }
 }
