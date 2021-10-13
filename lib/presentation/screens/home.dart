@@ -1,15 +1,16 @@
 import 'package:flitill/bussiness_logic/bloc/bloc.dart';
 import 'package:flitill/bussiness_logic/bloc/states.dart';
 import 'package:flitill/bussiness_logic/fetch_data_bloc/bloc/fetch_data_bloc.dart';
+import 'package:flitill/presentation/widgets/details.dart';
+import 'package:flitill/presentation/widgets/scaled_list.dart';
+import 'package:flitill/presentation/widgets/shopping_cart.dart';
+import 'package:flitill/presentation/widgets/showDetailsDiver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'screens/favProduct.dart';
-import 'screens/widgets/details.dart';
-import 'screens/widgets/scaled_list.dart';
-import 'screens/widgets/shopping_cart.dart';
-import 'screens/widgets/showDetailsDiver.dart';
+import 'favProduct.dart';
 
 class MyHomePage extends StatefulWidget {
+  static const id = 'home_page';
   const MyHomePage({Key key}) : super(key: key);
 
   @override

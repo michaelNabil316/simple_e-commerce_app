@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:flitill/presentation/screens/widgets/favWidget.dart';
+import 'package:flitill/presentation/widgets/favWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

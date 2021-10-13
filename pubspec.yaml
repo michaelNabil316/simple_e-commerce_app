@@ -20,6 +20,7 @@ dependencies:
   scaled_list: ^1.0.1+6
   dio: ^4.0.0
   awesome_dialog: ^1.3.2
+  intl_phone_number_input: ^0.6.0
 
 dev_dependencies:
   flutter_test:
