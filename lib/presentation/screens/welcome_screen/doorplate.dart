@@ -12,7 +12,7 @@ class Doorplate extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 50),
       child: Transform(
         alignment: AlignmentDirectional.center,
-        transform: Matrix4.identity()..rotateZ(330 * 3.1415927 / 180),
+        transform: Matrix4.identity()..rotateZ(340 * 3.1415927 / 180),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
           decoration: doorpatelBord,

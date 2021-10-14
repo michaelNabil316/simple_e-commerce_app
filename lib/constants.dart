@@ -33,6 +33,7 @@ const MaterialColor kSubColor = MaterialColor(
 );
 
 const subColor = Color.fromARGB(255, 122, 180, 182);
+const lessSubColor = Color.fromARGB(255, 172, 230, 232);
 const shadoSubColor = Color.fromARGB(150, 122, 180, 182);
 final mainCardsText =
     TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600);
@@ -49,6 +50,11 @@ final doorpatelBord = BoxDecoration(
   border: Border.all(color: Colors.amber.shade400, width: 0.5),
   borderRadius: BorderRadius.circular(20),
   color: Colors.amber,
+);
+final weclomeBoxDec = BoxDecoration(
+  border: Border.all(color: lessSubColor, width: 0.5),
+  borderRadius: BorderRadius.only(bottomRight: Radius.circular(200)),
+  color: lessSubColor,
 );
 const addStyle = TextStyle(fontSize: 18, color: Colors.white);
 const doorpatelTxtStyle = TextStyle(fontSize: 25, fontWeight: FontWeight.bold);
